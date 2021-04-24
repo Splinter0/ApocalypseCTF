@@ -1,0 +1,7 @@
+{
+    "permissions":  [
+      "resourcemanager.projects.get",
+      "resourcemanager.projects.delete"
+    ]
+  }
+  

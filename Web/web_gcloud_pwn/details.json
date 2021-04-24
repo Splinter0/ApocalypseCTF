@@ -1,0 +1,100 @@
+{
+  "id": "7397947137517811906",
+  "creationTimestamp": "2021-04-09T05:18:54.330-07:00",
+  "name": "instance-1",
+  "description": "",
+  "tags": {
+    "fingerprint": "42WmSpB8rSM="
+  },
+  "machineType": "https://www.googleapis.com/compute/v1/projects/essential-hawk-310212/zones/us-central1-a/machineTypes/e2-medium",
+  "status": "RUNNING",
+  "zone": "https://www.googleapis.com/compute/v1/projects/essential-hawk-310212/zones/us-central1-a",
+  "canIpForward": false,
+  "networkInterfaces": [
+    {
+      "network": "https://www.googleapis.com/compute/v1/projects/essential-hawk-310212/global/networks/default",
+      "subnetwork": "https://www.googleapis.com/compute/v1/projects/essential-hawk-310212/regions/us-central1/subnetworks/default",
+      "networkIP": "10.128.0.2",
+      "name": "nic0",
+      "accessConfigs": [
+        {
+          "type": "ONE_TO_ONE_NAT",
+          "name": "External NAT",
+          "natIP": "162.222.183.14",
+          "networkTier": "PREMIUM",
+          "kind": "compute#accessConfig"
+        }
+      ],
+      "fingerprint": "ZgevIHG7rGU=",
+      "kind": "compute#networkInterface"
+    }
+  ],
+  "disks": [
+    {
+      "type": "PERSISTENT",
+      "mode": "READ_WRITE",
+      "source": "https://www.googleapis.com/compute/v1/projects/essential-hawk-310212/zones/us-central1-a/disks/instance-1",
+      "deviceName": "instance-1",
+      "index": 0,
+      "boot": true,
+      "autoDelete": true,
+      "licenses": [
+        "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/licenses/debian-10-buster"
+      ],
+      "interface": "SCSI",
+      "guestOsFeatures": [
+        {
+          "type": "UEFI_COMPATIBLE"
+        },
+        {
+          "type": "VIRTIO_SCSI_MULTIQUEUE"
+        }
+      ],
+      "diskSizeGb": "10",
+      "kind": "compute#attachedDisk"
+    }
+  ],
+  "metadata": {
+    "fingerprint": "YoUYrMLhhIk=",
+    "kind": "compute#metadata"
+  },
+  "serviceAccounts": [
+    {
+      "email": "pdfme-role@essential-hawk-310212.iam.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/cloud-platform"
+      ]
+    }
+  ],
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/essential-hawk-310212/zones/us-central1-a/instances/instance-1",
+  "scheduling": {
+    "onHostMaintenance": "MIGRATE",
+    "automaticRestart": true,
+    "preemptible": false
+  },
+  "cpuPlatform": "AMD Rome",
+  "labelFingerprint": "42WmSpB8rSM=",
+  "startRestricted": false,
+  "deletionProtection": false,
+  "reservationAffinity": {
+    "consumeReservationType": "ANY_RESERVATION"
+  },
+  "displayDevice": {
+    "enableDisplay": false
+  },
+  "shieldedInstanceConfig": {
+    "enableSecureBoot": false,
+    "enableVtpm": true,
+    "enableIntegrityMonitoring": true
+  },
+  "shieldedInstanceIntegrityPolicy": {
+    "updateAutoLearnPolicy": true
+  },
+  "confidentialInstanceConfig": {
+    "enableConfidentialCompute": false
+  },
+  "fingerprint": "odlV6dDDlpg=",
+  "lastStartTimestamp": "2021-04-23T15:29:53.884-07:00",
+  "lastStopTimestamp": "2021-04-23T15:02:02.180-07:00",
+  "kind": "compute#instance"
+}
